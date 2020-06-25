@@ -1,4 +1,4 @@
-package com.codeart.thread;
+package com.codeart.thread.week2;
 
 import java.text.NumberFormat;
 

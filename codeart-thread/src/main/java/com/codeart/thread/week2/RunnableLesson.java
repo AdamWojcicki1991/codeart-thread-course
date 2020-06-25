@@ -1,4 +1,4 @@
-package com.codeart.thread;
+package com.codeart.thread.week2;
 
 public class RunnableLesson {
     public static void main(String[] args) {
