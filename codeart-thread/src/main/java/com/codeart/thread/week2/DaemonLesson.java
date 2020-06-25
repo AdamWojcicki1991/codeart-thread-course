@@ -10,8 +10,8 @@ public class DaemonLesson {
         Runnable diagnosticTask = new Runnable() {
             @Override
             public void run() {
-                try {
-                    while (true) {
+                while (true) {
+                    try {
                         Runtime runtime = Runtime.getRuntime();
                         NumberFormat format = NumberFormat.getInstance();
 
@@ -26,9 +26,9 @@ public class DaemonLesson {
                         stringBuilder.append("total free memory: " + format.format((freeMemory + maxMemory - allocatedMemory) / 1024) + "\n");
                         System.out.println(stringBuilder.toString());
                         Thread.sleep(1_000);
+                    } catch (InterruptedException e) {
+                        throw new IllegalStateException(e);
                     }
-                } catch (InterruptedException e) {
-                    throw new IllegalStateException(e);
                 }
             }
         };

@@ -9,7 +9,7 @@ public class StoppingLesson {
         t0.start();
         Thread.sleep(5_000);
         System.out.println("Done");
-        telemetric.stopTask();
+//        telemetric.stopTask();
         //break with interrupt
         t0.interrupt();
         t0.join();
