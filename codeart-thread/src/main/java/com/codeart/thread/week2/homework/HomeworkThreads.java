@@ -1,4 +1,4 @@
-package com.codeart.thread.week2;
+package com.codeart.thread.week2.homework;
 
 import java.util.Random;
 import java.util.stream.IntStream;
