@@ -18,7 +18,7 @@ public class CompletableFutureLesson1 {
             } catch (InterruptedException e) {
                 throw new IllegalStateException(e);
             }
-        });
+        }/*, Executors.newFixedThreadPool(4)*/);
 
         Runnable task = new Runnable() {
             @Override

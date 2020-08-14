@@ -7,33 +7,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.IntStream;
 
 public class HomeworkThreadPool {
-    private static String diagnosticMonitor(final ThreadPoolExecutor executor, final AtomicLong lostTaskCount) {
-        return "[" + Thread.currentThread().getName() +
-                "] Queue capacity is full - [" +
-                "Task count: " + executor.getTaskCount() +
-                " | Pool size: " + executor.getPoolSize() +
-                " | Keep Alive Time [sec]: " + executor.getKeepAliveTime(TimeUnit.SECONDS) +
-                " | Queue size: " + executor.getQueue().size() +
-                " | Task lost count: " + lostTaskCount + "]";
-    }
-
-    private static void shutdown(Counter counter, ThreadPoolExecutor threadPoolExecutor) {
-        if (threadPoolExecutor.isShutdown()) {
-            System.out.println("RejectedExecution shutdown - Task lost count was to big: " + counter.value);
-        } else {
-            System.out.println("Application shutdown - Task lost count was under 10: " + counter.value);
-            threadPoolExecutor.shutdown();
-        }
-    }
-
-    private final static class Counter {
-        private final AtomicLong value = new AtomicLong(0);
-
-        private long increment() {
-            return value.incrementAndGet();
-        }
-    }
-
     public static void main(String[] args) {
         System.out.println("[" + Thread.currentThread().getName() + "] START");
 
@@ -63,5 +36,32 @@ public class HomeworkThreadPool {
         shutdown(counter, threadPoolExecutor);
 
         System.out.println("[" + Thread.currentThread().getName() + "] DONE");
+    }
+
+    private final static class Counter {
+        private final AtomicLong value = new AtomicLong(0);
+
+        private long increment() {
+            return value.incrementAndGet();
+        }
+    }
+
+    private static String diagnosticMonitor(final ThreadPoolExecutor executor, final AtomicLong lostTaskCount) {
+        return "[" + Thread.currentThread().getName() +
+                "] Queue capacity is full - [" +
+                "Task count: " + executor.getTaskCount() +
+                " | Pool size: " + executor.getPoolSize() +
+                " | Keep Alive Time [sec]: " + executor.getKeepAliveTime(TimeUnit.SECONDS) +
+                " | Queue size: " + executor.getQueue().size() +
+                " | Task lost count: " + lostTaskCount + "]";
+    }
+
+    private static void shutdown(Counter counter, ThreadPoolExecutor threadPoolExecutor) {
+        if (threadPoolExecutor.isShutdown()) {
+            System.out.println("RejectedExecution shutdown - Task lost count was to big: " + counter.value);
+        } else {
+            System.out.println("Application shutdown - Task lost count was under 10: " + counter.value);
+            threadPoolExecutor.shutdown();
+        }
     }
 }
