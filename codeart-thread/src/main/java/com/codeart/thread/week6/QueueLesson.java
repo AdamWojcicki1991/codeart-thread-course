@@ -1,4 +1,4 @@
-package com.codeart.thread;
+package com.codeart.thread.week6;
 
 import java.time.LocalDateTime;
 import java.util.Random;
